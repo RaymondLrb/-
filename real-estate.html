@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>雷荣辉 Adam Lei - 房地产与知识产权专业服务平台</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Microsoft YaHei", Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+            perspective: 1000px;
+        }
+
+        /* 3D 背景动画 */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            animation: float3D 20s infinite ease-in-out;
+        }
+
+        .bg-shape:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .bg-shape:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+        }
+
+        .bg-shape:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 30%;
+            animation-delay: -10s;
+        }
+
+        .bg-shape:nth-child(4) {
+            width: 250px;
+            height: 250px;
+            top: 30%;
+            right: 30%;
+            animation-delay: -15s;
+        }
+
+        @keyframes float3D {
+            0%, 100% {
+                transform: translate3d(0, 0, 0) rotateX(0) rotateY(0);
+            }
+            25% {
+                transform: translate3d(50px, 30px, 50px) rotateX(10deg) rotateY(10deg);
+            }
+            50% {
+                transform: translate3d(-30px, -50px, 30px) rotateX(-10deg) rotateY(5deg);
+            }
+            75% {
+                transform: translate3d(40px, -20px, -40px) rotateX(5deg) rotateY(-10deg);
+            }
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 30px 20px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 3D 卡片效果 */
+        .card-3d {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 
+                0 20px 60px rgba(0,0,0,0.3),
+                0 0 0 1px rgba(255,255,255,0.1);
+            text-align: center;
+            transform-style: preserve-3d;
+            transition: all 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            animation: cardEntrance 0.8s ease-out both;
+        }
+
+        .card-3d:hover {
+            transform: rotateX(5deg) rotateY(-5deg) translateZ(20px);
+            box-shadow: 
+                0 30px 80px rgba(0,0,0,0.4),
+                0 0 0 1px rgba(255,255,255,0.2);
+        }
+
+        @keyframes cardEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(50px) rotateX(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            color: white;
+            padding: 50px 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+            transform-style: preserve-3d;
+            animation: headerEntrance 1s ease-out both;
+        }
+
+        @keyframes headerEntrance {
+            from {
+                opacity: 0;
+                transform: translateY(-50px) rotateX(-10deg);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) rotateX(0);
+            }
+        }
+
+        .header h1 {
+            font-size: 2.8em;
+            margin-bottom: 15px;
+            font-weight: 700;
+            text-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            animation: textGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes textGlow {
+            0%, 100% {
+                filter: drop-shadow(0 0 5px rgba(255,255,255,0.5));
+            }
+            50% {
+                filter: drop-shadow(0 0 20px rgba(255,255,255,0.8));
+            }
+        }
+
+        .header .subtitle {
+            font-size: 1.3em;
+            opacity: 0.95;
+            margin-bottom: 10px;
+        }
+
+        .contact-bar {
+            background: transparent;
+            padding: 0;
+            margin-top: 25px;
+        }
+
+        /* 3D 联系信息网格 */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+            perspective: 1000px;
+        }
+
+        .contact-item {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0f0ff 100%);
+            border-radius: 15px;
+            padding: 20px 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            animation: flipIn 0.6s ease-out both;
+        }
+
+        .contact-item:nth-child(1) { animation-delay: 0.1s; }
+        .contact-item:nth-child(2) { animation-delay: 0.2s; }
+        .contact-item:nth-child(3) { animation-delay: 0.3s; }
+        .contact-item:nth-child(4) { animation-delay: 0.4s; }
+        .contact-item:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes flipIn {
+            from {
+                opacity: 0;
+                transform: rotateY(-90deg);
+            }
+            to {
+                opacity: 1;
+                transform: rotateY(0);
+            }
+        }
+
+        .contact-item:hover {
+            transform: rotateY(10deg) rotateX(10deg) scale(1.05) translateZ(15px);
+            box-shadow: 0 20px 50px rgba(0, 102, 204, 0.5);
+        }
+
+        .contact-item .icon {
+            font-size: 2.2em;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.2));
+        }
+
+        .contact-item .label {
+            color: #888;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .contact-item .value {
+            color: #0066cc;
+            font-weight: 600;
+            font-size: 1em;
+        }
+
+        /* 3D 资质标签 */
+        .qualifications {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 25px;
+            perspective: 1000px;
+        }
+
+        .qual-tag {
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            color: white;
+            padding: 12px 25px;
+            border-radius: 30px;
+            font-size: 0.95em;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            transform-style: preserve-3d;
+            animation: bounceIn 0.8s ease-out both;
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.4);
+        }
+
+        .qual-tag:nth-child(1) { animation-delay: 0.1s; }
+        .qual-tag:nth-child(2) { animation-delay: 0.2s; }
+        .qual-tag:nth-child(3) { animation-delay: 0.3s; }
+        .qual-tag:nth-child(4) { animation-delay: 0.4s; }
+        .qual-tag:nth-child(5) { animation-delay: 0.5s; }
+
+        @keyframes bounceIn {
+            0% {
+                opacity: 0;
+                transform: scale(0.3) translateY(-50px);
+            }
+            50% {
+                transform: scale(1.05) translateY(0);
+            }
+            70% {
+                transform: scale(0.9);
+            }
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .qual-tag:hover {
+            transform: scale(1.1) rotateZ(-5deg) translateZ(20px);
+            box-shadow: 0 10px 40px rgba(0, 102, 204, 0.6);
+        }
+
+        /* Section */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            animation: slideUp 0.8s ease-out 0.3s both;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section:hover {
+            transform: rotateX(2deg) scale(1.01);
+        }
+
+        .section-title {
+            font-size: 1.9em;
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            text-align: center;
+        }
+
+        .section-title-cn {
+            font-size: 1.4em;
+            color: #0066cc;
+            margin: 30px 0 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        /* Philosophy */
+        .philosophy-box {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0f0ff 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            border-left: 5px solid #0066cc;
+            transform-style: preserve-3d;
+            transition: all 0.4s ease;
+            animation: pulse 3s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+                box-shadow: 0 5px 20px rgba(0, 102, 204, 0.2);
+            }
+            50% {
+                transform: scale(1.02);
+                box-shadow: 0 10px 40px rgba(0, 102, 204, 0.3);
+            }
+        }
+
+        .philosophy-box:hover {
+            transform: scale(1.03) rotateY(2deg);
+        }
+
+        .philosophy-item {
+            margin: 15px 0;
+            padding: 15px;
+            background: white;
+            border-radius: 10px;
+            font-size: 1.05em;
+            transition: all 0.3s ease;
+        }
+
+        .philosophy-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(0, 102, 204, 0.15);
+        }
+
+        /* Service Cards */
+        .service-card {
+            background: linear-gradient(135deg, #f8f9ff 0%, #e8f0ff 100%);
+            border-radius: 15px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #0066cc;
+            transition: all 0.4s ease;
+            transform-style: preserve-3d;
+            text-align: left;
+            animation: slideInLeft 0.6s ease-out both;
+        }
+
+        .service-card:nth-child(2) { animation-delay: 0.1s; }
+        .service-card:nth-child(3) { animation-delay: 0.2s; }
+        .service-card:nth-child(4) { animation-delay: 0.3s; }
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .service-card:hover {
+            transform: translateX(15px) scale(1.02) rotateY(-3deg);
+            box-shadow: 0 15px 40px rgba(0, 102, 204, 0.25);
+        }
+
+        .service-card h3 {
+            color: #0066cc;
+            font-size: 1.2em;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            margin: 10px 0;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .service-card .price {
+            color: #00aa00;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 15px 0;
+        }
+
+        /* Table */
+        .table-container {
+            overflow-x: auto;
+            margin: 20px 0;
+            perspective: 1000px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+            transform-style: preserve-3d;
+            transition: all 0.3s ease;
+        }
+
+        table:hover {
+            transform: scale(1.01);
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 15px 12px;
+            text-align: left;
+        }
+
+        th {
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            color: white;
+            font-weight: bold;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        tr {
+            transition: all 0.3s ease;
+        }
+
+        tr:hover {
+            background: #f0f7ff;
+            transform: scale(1.01);
+        }
+
+        /* Package */
+        .package-card {
+            background: linear-gradient(135deg, #0066cc, #0099ff);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            transform-style: preserve-3d;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            animation: zoomIn 0.8s ease-out both;
+        }
+
+        .package-card:nth-child(1) { animation-delay: 0.1s; }
+        .package-card:nth-child(2) { animation-delay: 0.2s; }
+        .package-card:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes zoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .package-card:hover {
+            transform: translateY(-10px) scale(1.03) rotateX(5deg);
+            box-shadow: 0 20px 50px rgba(0, 102, 204, 0.4);
+        }
+
+        .package-card h4 {
+            font-size: 1.3em;
+            margin-bottom: 15px;
+        }
+
+        .package-card .price {
+            font-size: 1.8em;
+            font-weight: bold;
+            margin: 15px 0;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        .package-card.premium {
+            background: linear-gradient(135deg, #ff6600, #ff9933);
+        }
+
+        .package-card.premium:hover {
+            box-shadow: 0 20px 50px rgba(255, 102, 0, 0.4);
+        }
+
+        .package-card.efficient {
+            background: linear-gradient(135deg, #00aa66, #00cc88);
+        }
+
+        .package-card.efficient:hover {
+            box-shadow: 0 20px 50px rgba(0, 170, 102, 0.4);
+        }
+
+        /* Contact */
+        .contact-section {
+            background: linear-gradient(135deg, #f0f7ff 0%, #e0f0ff 100%);
+            padding: 40px 30px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+            transform-style: preserve-3d;
+            transition: all 0.5s ease;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .contact-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #0066cc 0%, #0099ff 100%);
+            color: white;
+            padding: 18px 45px;
+            border-radius: 35px;
+            text-decoration: none;
+            margin: 15px;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.4);
+            transform-style: preserve-3d;
+        }
+
+        .contact-btn:hover {
+            transform: translateY(-5px) scale(1.05) rotateX(-10deg);
+            box-shadow: 0 20px 50px rgba(0, 102, 204, 0.6);
+        }
+
+        /* QR Code */
+        .qr-section {
+            margin-top: 35px;
+            padding-top: 35px;
+            border-top: 3px dashed #ddd;
+        }
+
+        .qr-grid {
+            display: flex;
+            gap: 25px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .qr-item {
+            text-align: center;
+            transition: all 0.4s ease;
+            animation: fadeInUp 0.8s ease-out both;
+        }
+
+        .qr-item:nth-child(1) { animation-delay: 0.2s; }
+        .qr-item:nth-child(2) { animation-delay: 0.4s; }
+        .qr-item:nth-child(3) { animation-delay: 0.6s; }
+
+        .qr-item:hover {
+            transform: translateY(-10px) scale(1.05);
+        }
+
+        .qr-item img {
+            width: 180px;
+            border-radius: 15px;
+            border: 3px solid #07c160;
+            box-shadow: 0 10px 30px rgba(7, 193, 96, 0.3);
+            transition: all 0.4s ease;
+        }
+
+        .qr-item:hover img {
+            box-shadow: 0 20px 50px rgba(7, 193, 96, 0.5);
+            transform: rotateY(10deg);
+        }
+
+        .qr-item p {
+            margin-top: 12px;
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Footer */
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            font-size: 0.9em;
+            border-radius: 15px;
+            margin-top: 20px;
+            animation: fadeIn 1s ease-out both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px 15px;
+            }
+
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .header .subtitle {
+                font-size: 1.1em;
+            }
+
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .qualifications {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .qual-tag {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+
+            .section {
+                padding: 30px 20px;
+            }
+
+            .section-title {
+                font-size: 1.5em;
+            }
+
+            .service-card {
+                padding: 20px;
+            }
+
+            .package-card {
+                padding: 25px;
+            }
+
+            .contact-btn {
+                padding: 15px 35px;
+                font-size: 1em;
+                display: block;
+                margin: 10px auto;
+                max-width: 280px;
+            }
+
+            .qr-grid {
+                gap: 20px;
+            }
+
+            .qr-item img {
+                width: 150px;
+            }
+
+            .table-container {
+                font-size: 13px;
+            }
+
+            th, td {
+                padding: 10px 8px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 1.7em;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .contact-item {
+                padding: 15px 12px;
+            }
+
+            .contact-item .icon {
+                font-size: 1.8em;
+            }
+
+            .qual-tag {
+                padding: 10px 20px;
+                font-size: 0.85em;
+            }
+
+            .section-title {
+                font-size: 1.3em;
+            }
+
+            .philosophy-box {
+                padding: 20px;
+            }
+        }
+
+        /* 鼠标移动 3D 效果 */
+        .tilt-effect {
+            transform-style: preserve-3d;
+            transition: transform 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- 3D 背景动画 -->
+    <div class="bg-animation">
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+        <div class="bg-shape"></div>
+    </div>
+
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>雷荣辉 Adam Lei</h1>
+            <p class="subtitle">多元执业资质 · 专业服务平台</p>
+            <p class="subtitle">Multi-Qualified Professional · Integrated Services Platform</p>
+            
+            <div class="contact-bar">
+                <div class="contact-grid">
+                    <div class="contact-item">
+                        <span class="icon">📞</span>
+                        <span class="label">香港 HK</span>
+                        <span class="value">852-55357390</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">📞</span>
+                        <span class="label">内地 Mainland</span>
+                        <span class="value">13580346465</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">🎓</span>
+                        <span class="label">学历 Education</span>
+                        <span class="value">中山大学药学士</span>
+                    </div>
+                    <div class="contact-item">
+                        <span class="icon">🎓</span>
+                        <span class="label">学位 Degree</span>
+                        <span class="value">药学工程学双学位</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="qualifications">
+                <span class="qual-tag">💼 总药师</span>
+                <span class="qual-tag">🏗️ 总监理工程师</span>
+                <span class="qual-tag">📊 总审计师</span>
+                <span class="qual-tag">⚖️ 顾问律师</span>
+                <span class="qual-tag">🤝 主任社工师</span>
+            </div>
+        </div>
+        
+        <!-- Philosophy -->
+        <div class="section">
+            <h2 class="section-title">⭐ 核心服务理念 Core Philosophy</h2>
+            <div class="philosophy-box">
+                <div class="philosophy-item">
+                    <strong>💡 简单说：专业多一点，风险少一点</strong><br>
+                    Simply Put: More Professionalism, Less Risk
+                </div>
+                <div class="philosophy-item">
+                    <strong>🤝 实在说：收费透明 · 服务到底 · 拒绝套路</strong><br>
+                    Honestly Put: Transparent Fees · Full Service · No Hidden Agendas
+                </div>
+                <div class="philosophy-item">
+                    <strong>🏆 自信说：房产·专利·财税 —— 全领域专家团队为您服务</strong><br>
+                    Confidently Put: Property · Patents · Tax — Expert Team at Your Service
+                </div>
+            </div>
+        </div>
+        
+        <!-- Real Estate -->
+        <div class="section">
+            <h2 class="section-title">🏠 中国宜元物产股份有限公司</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">天水围地产专家 · 全流程交易护航</p>
+            
+            <h3 class="section-title-cn">为什么选择我们？</h3>
+            <div class="service-card">
+                <p>🎯 <strong>区域专家</strong> — 深耕天水围，熟悉每个屋苑、每条街道</p>
+                <p>💰 <strong>透明收费</strong> — 佣金公开透明，无隐藏费用</p>
+                <p>📋 <strong>全流程支持</strong> — 从看房到交楼，全程专业陪同</p>
+                <p>⚖️ <strong>合规保障</strong> — 合同审查、风险评估，交易零风险</p>
+            </div>
+            
+            <h3 class="section-title-cn">服务项目与收费</h3>
+            <div class="table-container">
+                <table>
+                    <tbody><tr>
+                        <th>服务类型</th>
+                        <th>服务内容</th>
+                        <th>收费标准</th>
+                    </tr>
+                    <tr>
+                        <td><strong>住宅租赁</strong></td>
+                        <td>整租/分租代理<br>租约审查<br>租客核实<br>交楼验收</td>
+                        <td class="price">1 个月租金</td>
+                    </tr>
+                    <tr>
+                        <td><strong>住宅买卖</strong></td>
+                        <td>物业估值<br>买卖盘配对<br>价格谈判<br>流程指导</td>
+                        <td class="price">成交价 1%</td>
+                    </tr>
+                    <tr>
+                        <td><strong>功能地产</strong></td>
+                        <td>商铺/写字楼<br>工业物业<br>投资策划</td>
+                        <td class="price">面议</td>
+                    </tr>
+                </tbody></table>
+            </div>
+            
+            <h3 class="section-title-cn">服务套餐</h3>
+            <div class="package-card">
+                <h4>A 标准服务 Standard Service</h4>
+                <p>物业配对 · 带看服务 · 价格谈判 · 临时合约签署</p>
+                <p class="price">租赁：1 个月租金 | 买卖：1% 佣金</p>
+            </div>
+            <div class="package-card premium">
+                <h4>B 尊享服务 Premium Service 💎</h4>
+                <p>标准服务全部内容 + 专业合同审查 + 全程交易支持 + 土地查册 + 风险评估报告</p>
+                <p class="price">HK$3,000</p>
+                <p style="font-size: 13px; opacity: 0.9;">适合：首次置业者、异地买家、追求安心交易的客户</p>
+            </div>
+            <div class="package-card efficient">
+                <h4>C 高效代理服务 Efficient Service ⚡</h4>
+                <p>客户自行办理查册/厘印/文件 + 我方提供全程交易指导</p>
+                <p class="price">FREE（买方/租方零费用）</p>
+                <p style="font-size: 13px; opacity: 0.9;">适合：有经验投资者、熟悉流程人士、预算敏感客户</p>
+            </div>
+        </div>
+        
+        <!-- IP & Tax -->
+        <div class="section">
+            <h2 class="section-title">🌐 SHE DATA HK LIMITED</h2>
+            <p style="text-align: center; color: #666; margin-bottom: 20px;">全球知识产权 · 跨境财税专家</p>
+            
+            <h3 class="section-title-cn">服务覆盖区域</h3>
+            <div class="service-card" style="text-align: center;">
+                <p style="font-size: 16px;">🇨🇳 中国 · 🇭🇰 香港 · 🇬🇧 英国 · 🇺🇸 美国 · 🇪🇺 欧盟 · 🇦🇺 澳洲 · 🇯🇵 日本</p>
+                <p style="color: #0066cc; font-weight: bold; margin-top: 10px;">一站式服务：一次咨询，全球保护</p>
+            </div>
+            
+            <h3 class="section-title-cn">知识产权服务</h3>
+            <div class="table-container">
+                <table>
+                    <tbody><tr>
+                        <th>服务类型</th>
+                        <th>服务内容</th>
+                    </tr>
+                    <tr>
+                        <td><strong>专利申请</strong></td>
+                        <td>发明/实用新型/外观设计<br>PCT 国际申请<br>保护期：20/10/15 年</td>
+                    </tr>
+                    <tr>
+                        <td><strong>商标注册</strong></td>
+                        <td>商标检索 · 注册申请 · 异议答辩<br>欧盟商标 · 马德里国际注册</td>
+                    </tr>
+                    <tr>
+                        <td><strong>知识产权布局</strong></td>
+                        <td>专利地图分析 · FTO 分析<br>竞争对手监控 · 许可转让</td>
+                    </tr>
+                </tbody></table>
+            </div>
+            
+            <h3 class="section-title-cn">跨境财税筹划</h3>
+            <div class="service-card">
+                <p><strong>税务优化：</strong>跨境架构设计 · 转让定价筹划 · 税收协定应用</p>
+                <p><strong>合规节税：</strong>香港利得税 8.25% · 高新企业 15% · 研发费用加计扣除</p>
+                <p><strong>财税咨询：</strong>跨境投资税务 · CRS/FATCA 合规 · 常年财税顾问</p>
+            </div>
+            
+            <h3 class="section-title-cn">服务套餐</h3>
+            <div class="table-container">
+                <table>
+                    <tbody><tr>
+                        <th>套餐</th>
+                        <th>服务内容</th>
+                        <th>费用</th>
+                    </tr>
+                    <tr>
+                        <td><strong>A 初创企业</strong></td>
+                        <td>香港公司注册<br>商标注册（1 类）<br>基础财税咨询<br>年度报税指导</td>
+                        <td class="price">HK$8,800 起</td>
+                    </tr>
+                    <tr>
+                        <td><strong>B 成长企业</strong></td>
+                        <td>A 套餐全部内容<br>专利申请（1 项）<br>商标注册（3 类）<br>跨境财税筹划方案<br>季度财税咨询</td>
+                        <td class="price">HK$28,800 起</td>
+                    </tr>
+                    <tr>
+                        <td><strong>C 企业定制</strong></td>
+                        <td>全球知识产权布局规划<br>多国专利申请（5+ 国家）<br>跨境税务架构设计<br>常年财税顾问（1 年）<br>7×24 小时优先支持</td>
+                        <td class="price">定制报价</td>
+                    </tr>
+                </tbody></table>
+            </div>
+            
+            <h3 class="section-title-cn">常见问题 FAQ</h3>
+            <div class="service-card">
+                <p><strong>Q: 专利申请需要多长时间？</strong></p>
+                <p>A: 发明专利 2-3 年，实用新型 6-12 个月，外观设计 4-8 个月（因国家而异）</p>
+                <hr style="margin: 10px 0; border: none; border-top: 1px dashed #ddd;">
+                <p><strong>Q: 商标注册成功率如何？</strong></p>
+                <p>A: 经过专业检索后，成功率可达 85% 以上</p>
+                <hr style="margin: 10px 0; border: none; border-top: 1px dashed #ddd;">
+                <p><strong>Q: 跨境财税筹划合法吗？</strong></p>
+                <p>A: 完全合法！我们做的是税务优化 (Tax Optimization)，不是逃税 (Tax Evasion)</p>
+            </div>
+        </div>
+        
+        <!-- Contact -->
+        <div class="contact-section">
+            <h2 class="section-title" style="border: none;">📞 联系我们 Contact</h2>
+            <p style="font-size: 18px; margin-bottom: 20px;"><strong>雷荣辉 Adam Lei</strong></p>
+            <p style="font-size: 16px; margin: 10px 0; color: #07c160; font-weight: 600;">
+                📱 微信 &amp; WhatsApp：85255357390
+            </p>
+            <p style="font-size: 16px; margin: 10px 0;">📍 服务区域：香港天水围 · 粤港澳大湾区</p>
+            <p style="font-size: 16px; margin: 10px 0;">🕐 办公时间：周一至周五 9:00-18:00</p>
+            <a href="https://wa.me/85255357390?text=我想咨询地产" class="contact-btn">💬 WhatsApp / 微信预约</a>
+            
+            <div class="qr-section">
+                <h3 style="font-size: 16px; color: #666; margin-bottom: 10px; text-align: center;">📱 扫码联系 / 付款</h3>
+                <div class="qr-grid">
+                    <div class="qr-item">
+                        <img src="wechat-qr.png" alt="微信二维码" style="width: 180px;">
+                        <p>微信添加</p>
+                    </div>
+                    <div class="qr-item">
+                        <img src="wechat-pay-hkd.png" alt="港币收款码" style="width: 180px;">
+                        <p>港币 HKD</p>
+                    </div>
+                    <div class="qr-item">
+                        <img src="wechat-pay-cny.png" alt="人民币收款码" style="width: 180px;">
+                        <p>人民币 CNY</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>© 2026 雷荣辉 Adam Lei 专业服务平台</p>
+            <p>中国宜元物产股份有限公司 | SHE DATA HK LIMITED</p>
+            <p style="margin-top: 10px; opacity: 0.8;">专业多一点，坑就少一点</p>
+            <p style="opacity: 0.8;">More Professionalism, Less Risk</p>
+        </div>
+    </div>
+
+    <script>
+        // 3D 倾斜效果 - 包含联系卡片
+        document.querySelectorAll('.card-3d, .service-card, .package-card, .section, .contact-item').forEach(card => {
+            card.addEventListener('mousemove', (e) => {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                const rotateX = (y - centerY) / 15;
+                const rotateY = (centerX - x) / 15;
+                card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                card.style.transform = 'rotateX(0) rotateY(0) scale(1)';
+            });
+        });
+
+        // 滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.section, .contact-section, .header').forEach(el => {
+            observer.observe(el);
+        });
+
+        // 按钮点击波纹效果
+        document.querySelectorAll('.contact-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.cssText = `
+                    position: absolute;
+                    width: ${size}px;
+                    height: ${size}px;
+                    left: ${x}px;
+                    top: ${y}px;
+                    background: rgba(255,255,255,0.4);
+                    border-radius: 50%;
+                    transform: scale(0);
+                    animation: ripple 0.6s ease-out;
+                    pointer-events: none;
+                `;
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => ripple.remove(), 600);
+            });
+        });
+    </script>
+</body>
+</html>
